@@ -1,0 +1,21 @@
+{
+  "name": "lobby",
+  "version": "0.0.1",
+  "description": "A multiplayer game lobby",
+  "repository": "git@github.com:swiftpostlab/lobby.git",
+  "author": "Fabio Colella <fcole90@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint",
+    "build": "tsc --build",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.0"
+  }
+}

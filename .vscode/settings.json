@@ -1,0 +1,17 @@
+{
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll",
+  ],
+  "editor.formatOnSave": true,
+  "editor.autoIndent": "advanced",
+  "editor.guides.indentation": true,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "[javascript]": {
+    "editor.tabSize": 2,
+  },
+  "[typescript]": {
+    "editor.tabSize": 2,
+  },
+}
