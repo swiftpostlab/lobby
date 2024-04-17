@@ -5,8 +5,15 @@
   <title>Socket Client example</title>
 </head>
 
-<body>
-  <p id="content"></p>
+<body style="display: flex; flex-direction: column; flex: 1; height: 100vh; box-sizing: border-box;">
+  <div>
+    <input id="messageTextInput" type="text">
+    <input id="sendMessageButton" type="button" value="Send">
+  </div>
+
+  <div style="display: flex; flex-direction: column; flex: 1; height: 100%;">
+    <code style="flex: 1; white-space: pre;" id="chatContent"></code>
+  </div>
   <script type="module">
     import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
 
@@ -20,16 +27,43 @@
       transports: ["websocket"]
     });
 
+    const updateChat = (line) => {
+      const chatContentElement = document.getElementById('chatContent')
+      if (line == null) {
+        return
+      }
+      chatContentElement.textContent += "\n" + line
+    }
+
     console.log("Opening socket to:", serverAddress);
 
     socket.on("connect", () => {
       console.log("Connected to", serverAddress, "with id:", socket.id);
     });
 
+    socket.on("handshake", (id) => {
+      console.log("Server sent handshake!")
+    })
+
+    socket.on("broadcastMessage", (from, message) => {
+      const line = `[${from}]: ` + message
+      console.log(line);
+      updateChat(line)
+    });
+
     socket.on("disconnect", () => {
       console.log("Disconnected")
       console.log(socket.id); // undefined
     });
+
+    const messageTextInput = document.getElementById('messageTextInput')
+    const sendBroadcastMessage = () => {
+      const message = messageTextInput.value
+      socket.emit("broadcastMessage", message)
+      messageTextInput.value = ""
+    }
+    document.getElementById('sendMessageButton').onclick = sendBroadcastMessage
+
   </script>
 </body>
 
