@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Socket Client example</title>
+</head>
+
+<body>
+  <p id="content"></p>
+  <script type="module">
+    import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+
+    const serverAddress = "http://localhost:3000"
+
+    const socket = io(serverAddress, {
+      cors: {
+        origin: serverAddress,
+        credentials: true
+      },
+      transports: ["websocket"]
+    });
+
+    console.log("Opening socket to:", serverAddress);
+
+    socket.on("connect", () => {
+      console.log("Connected to", serverAddress, "with id:", socket.id);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected")
+      console.log(socket.id); // undefined
+    });
+  </script>
+</body>
+
+</html>
