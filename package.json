@@ -5,17 +5,22 @@
   "repository": "git@github.com:swiftpostlab/lobby.git",
   "author": "Fabio Colella <fcole90@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "type": "module",
   "scripts": {
+    "start": "node dist/src/index.js",
     "lint": "eslint",
     "build": "tsc --build",
-    "dev": "tsc --watch"
+    "dev": "tsc-watch --onSuccess \"yarn start\""
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "eslint": "^9.0.0",
+    "tsc-watch": "^6.2.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.7.0"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.5"
   }
 }
